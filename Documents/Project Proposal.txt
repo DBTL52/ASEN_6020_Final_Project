@@ -1,0 +1,1 @@
+Using a CR3BP model, find low thrust optimal transfers from low earth orbit to L4/L5 Lagrange points. If able, also find optimal transfers from low earth orbit to L3 stable manifold. 
