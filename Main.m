@@ -34,7 +34,7 @@ mu = 0.0122;
 [L1,L2,L3,L4,L5] = LagrangePoints(mu);
 
 %% Find circular orbit
-r = 0.02;
+r = 0.021;
 r_0 = [-mu-r;0];
 v_circ = sqrt((1-mu)/r)-r;
 t_f = 2.*pi.*sqrt((r^3)/(1-mu));
