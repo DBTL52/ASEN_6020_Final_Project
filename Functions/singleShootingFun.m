@@ -30,7 +30,7 @@ Phi0 = eye(4); Phi0 = Phi0(:);
 X0 = [X0;Phi0];
 
 % Perform Shooting Algorithum
-tol = 1e-6; % Set tolerance
+tol = 1e-5; % Set tolerance
 c = 0;  % Initalize counter
 deltX = ones(6,1);
 warning('off', 'MATLAB:ode113:IntegrationTolNotMet');
@@ -85,7 +85,7 @@ while abs(norm(deltX)) > tol
     %Generating next step in iteration
     deltX = transpose(X(end,1:4)) - InitalPos;
     delX0 = (eye(4) - PhiT) \ deltX;
-    InitalPos = InitalPos + delX0;
+    InitalPos([1 4]) = InitalPos([1 4]) + delX0([1 4]);
     X0 =  [InitalPos;Phi0];
 
     % Save adjustments
