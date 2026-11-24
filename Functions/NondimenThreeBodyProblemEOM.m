@@ -1,4 +1,4 @@
-function [dX] = NondimenThreeBodyProblemEOM(X,mu)
+function [dX,u] = NondimenThreeBodyProblemEOM(X,mu)
 %ThreeBodyProblemEOM is a function used in ASEN 5050 CPHW3 in the
 %   ode45 funciton to model circular restricted three body problem.
 %-----------------------inputs---------------------------------------------
@@ -34,12 +34,12 @@ u = -p_v;
 [Vx,Vy,Vxx,Vyy,Vxy] = getPartials(x,y,mu);
 
 % Calculate adjoints differentals
-dp_r = -transpose(p_v) * [Vxx, Vxy; Vxy, Vyy];
-dp_v = -p_r + transpose(p_v) * [0,2;-2,0];
+dp_r = -[Vxx, Vxy; Vxy, Vyy] * p_v;
+dp_v = -p_r + [0,2;-2,0] * p_v;
 
 % Calc acceleration terms
-ddx = 2*dx + Vx + u(1);
-ddy = -2*dy + Vy + u(2);
+ddx = 2*dy + Vx + u(1);
+ddy = -2*dx + Vy + u(2);
 
 % Make output
 dX = [dx;dy;ddx;ddy;dp_r;dp_v];
